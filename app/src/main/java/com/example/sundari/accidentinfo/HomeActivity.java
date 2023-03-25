@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Logout();
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             }
         });
 
@@ -56,10 +56,6 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
             }
         });
-    }
-
-    private void Logout(){
-        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
     }
 
 }
