@@ -17,4 +17,4 @@
 2. Implemented Registration and Login functionality. -------------> (Murali Krishna, Sundari)
 3. Added Email verification service after registration 
    which ensures users authenticity.               ---------------> (Murali Krishna, Sundari)
-4. 
+4. Added Reset Password Business Logic.               ------------> (Murali Krishna, Sundari)
