@@ -18,3 +18,7 @@
 3. Added Email verification service after registration 
    which ensures users authenticity.               ---------------> (Murali Krishna, Sundari)
 4. Added Reset Password Business Logic.               ------------> (Murali Krishna, Sundari)
+5. Added Report Activity Business Logic like adding
+   video and image files of the accident location and
+   victims information.                              -------------> (Prudhvi Raju, Ranga)
+6. Added Insurance Activity Business Logic.   --------------------> (Prudhvi Raju, Ranga and Bindusree, Penamalli)
