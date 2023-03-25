@@ -12,6 +12,7 @@
 9. Created profile activity and its layout------------------------------>(Vengalarao Yeluri)
 10. Created change password template and its navigations---------------->(Vengalarao Yeluri)
 
+
 ###### Milestone -> 2
 1. Added Firebase dependencies to the project.   -----------------> (Murali Krishna, Sundari)
 2. Implemented Registration and Login functionality. -------------> (Murali Krishna, Sundari)
@@ -23,3 +24,5 @@
    victims information.                              -------------> (Prudhvi Raju, Ranga)
 6. Added Insurance Activity Business Logic.   --------------------> (Prudhvi Raju, Ranga and Bindusree, Penamalli)
 7. Added Access File Activities Business Logic. ---------------->   (Bindusree, Penamalli)
+8. Added Profile Activity Business Logic.-------------------------->(Vengalarao Yeluri)
+9. Added Change Password Activities Business Logic.---------------->(Vengalarao Yeluri)
