@@ -39,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         prepReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(HomeActivity.this , ReportPrepareActivity.class));
+                startActivity(new Intent(HomeActivity.this , ReportPrepareActivity.class));
             }
         });
 
