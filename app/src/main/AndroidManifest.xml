@@ -96,7 +96,46 @@
         android:name="android.app.lib_name"
         android:value="" />
     </activity>
+        <activity
+        android:name=".ImageAdapter"
+        android:exported="false">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+    </activity>
+    <activity
+        android:name=".ImageActivity"
+        android:exported="false"
+        android:label="@string/title_activity_image"
+        android:theme="@style/Theme.AccidentInfo.NoActionBar">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+    </activity>
 
+    <activity
+        android:name=".VideoActivity"
+        android:exported="false">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+    </activity>
+
+    <activity
+        android:name=".VideoAdapter"
+        android:exported="false">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+    </activity>
+
+    <activity
+        android:name=".InformationActivity"
+        android:exported="false">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
+    </activity>
     </application>
 
 </manifest>

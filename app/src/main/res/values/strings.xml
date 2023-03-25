@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">AccidentInfo</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_accident_info">Accident_Info</string>
+    <string name="title_activity_image">ImageActivity</string>
 
 </resources>
