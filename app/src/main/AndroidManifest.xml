@@ -61,6 +61,11 @@
             android:name="android.app.lib_name"
             android:value="" /></activity>
         <activity
+            android:name=".InsuranceInfoActivity"
+            android:exported="false"><meta-data
+            android:name="android.app.lib_name"
+            android:value="" /></activity>
+        <activity
             android:name=".AccessFileActivity"
             android:exported="false">
             <meta-data
