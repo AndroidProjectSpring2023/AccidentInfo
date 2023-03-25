@@ -1,5 +1,6 @@
 # AccidentInfo
 
+###### Milestone -> 1
 1. Created Login Template and Navigations.           -----------------> (Murali Krishna, Sundari)
 2. Created Registration Template and Navigations. .  -----------------> (Murali Krishna, Sundari)
 3. Created Reset Password Template and Navigations..  ----------------> (Murali Krishna, Sundari)
@@ -11,3 +12,9 @@
 9. Created profile activity and its layout------------------------------>(Vengalarao Yeluri)
 10. Created change password template and its navigations---------------->(Vengalarao Yeluri)
 
+###### Milestone -> 2
+1. Added Firebase dependencies to the project.   -----------------> (Murali Krishna, Sundari)
+2. Implemented Registration and Login functionality. -------------> (Murali Krishna, Sundari)
+3. Added Email verification service after registration 
+   which ensures users authenticity.               ---------------> (Murali Krishna, Sundari)
+4. 
