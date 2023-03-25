@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InformationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:id="@+id/tv_fileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="File No. : "
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_vName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Victim Name  : "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/tv_fileName"/>
+
+        <TextView
+            android:id="@+id/tv_vAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Victim Age      : "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/tv_vName"/>
+
+        <TextView
+            android:id="@+id/tv_Reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Reason    : "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/tv_vAge"/>
+
+        <TextView
+            android:id="@+id/tv_Location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Location  : "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/tv_Reason" />
+
+        <TextView
+            android:id="@+id/tv_Injuries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Injuries     : "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/tv_Location" />
+
+        <TextView
+            android:id="@+id/tv_InsuCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Insurance Company : "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/tv_Injuries" />
+
+        <TextView
+            android:id="@+id/tv_PolicyNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Policy No. : "
+            android:textSize="20sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@+id/tv_InsuCompany" />
+
+        <TextView
+            android:id="@+id/tv_ImgInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Click here to see the Photos of the Incident"
+            android:textSize="22sp"
+            android:layout_below="@+id/tv_PolicyNo" />
+
+        <TextView
+            android:id="@+id/tv_VideoInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Click here to see the Videos of the Incident"
+            android:textSize="22sp"
+            android:layout_below="@+id/tv_ImgInfo" />
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
