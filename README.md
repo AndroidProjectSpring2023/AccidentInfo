@@ -22,3 +22,4 @@
    video and image files of the accident location and
    victims information.                              -------------> (Prudhvi Raju, Ranga)
 6. Added Insurance Activity Business Logic.   --------------------> (Prudhvi Raju, Ranga and Bindusree, Penamalli)
+7. Added Access File Activities Business Logic. ---------------->   (Bindusree, Penamalli)
