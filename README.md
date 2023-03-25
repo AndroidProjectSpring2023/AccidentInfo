@@ -6,6 +6,8 @@
 4. Created Home Template..  ------------------------------------------> (Murali Krishna, Sundari)
 5. Created Insurance Activity Template. -------------------------------> (Prudhvi Raju, Ranga)
 6. Created Report Activity Template and it's Navigation. --------------> (Prudhvi Raju, Ranga)
-7. Created access file activity, template and navigations.-----------------> (Bindusree, Penamalli)
-8. Added Onclick listener to login as insurance agent. -----------------> (Bindusree, Penamalli)
- 
+7. Created access file activity, template and navigations.-------------> (Bindusree, Penamalli)
+8. Added Onclick listener to login as insurance agent. ----------------> (Bindusree, Penamalli)
+9. Created profile activity and its layout------------------------------>(Vengalarao Yeluri)
+10. Created change password template and its navigations---------------->(Vengalarao Yeluri)
+
