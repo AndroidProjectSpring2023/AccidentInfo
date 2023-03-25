@@ -61,6 +61,13 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, PasswordActivity.class));
             }
         });
+
+        insuAgent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this , InsuranceActivity.class));
+            }
+        });
     }
 
     private void validate(String userEmail, String userPassword) {
