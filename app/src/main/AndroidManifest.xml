@@ -73,15 +73,29 @@
         <meta-data
          android:name="android.app.lib_name"
          android:value="" />
-    </activity>
-    <activity
+        </activity>
+        <activity
          android:name=".ChangePwdActivity"
          android:exported="false">
-    <meta-data
+        <meta-data
          android:name="android.app.lib_name"
          android:value="" />
-</activity>
+        </activity>
 
+        <activity
+        android:name=".Accident_Info"
+         android:exported="false">
+        <meta-data
+        android:name="android.app.lib_name"
+        android:value="" />
+        </activity>
+        <activity
+        android:name=".Upload"
+        android:exported="false">
+        <meta-data
+        android:name="android.app.lib_name"
+        android:value="" />
+    </activity>
 
     </application>
 
