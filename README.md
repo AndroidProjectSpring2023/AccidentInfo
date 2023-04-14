@@ -32,3 +32,5 @@
 1. Updated some validations and hint messages.    -----------------> (Murali Krishna, Sundari)
 2. Added some firebase dependencies and did
    some modifications in landing page.            -----------------> (Murali Krishna, Sundari)
+3. Added App Logo.                                -----------------> (Murali Krishna, Sundari)
+4. 
