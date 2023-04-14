@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private ProgressDialog progressDialog;
+    private UserProfile userProfile = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +58,12 @@ public class HomeActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                userProfile = dataSnapshot.getValue(UserProfile.class);
                 if (userProfile != null) {
                     textView.setText("Welcome , " + userProfile.getUserName() );
+                    if(userProfile.userOccupation.equals("Other")){
+                        accessFile.setVisibility(View.INVISIBLE);
+                    }
                     progressDialog.dismiss();
                 }
             }
