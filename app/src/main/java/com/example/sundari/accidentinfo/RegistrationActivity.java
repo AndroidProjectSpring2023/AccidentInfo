@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Pattern;
+
 public class RegistrationActivity extends AppCompatActivity {
 
     private TextView textView , login;
@@ -88,25 +90,27 @@ public class RegistrationActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.radio_police:
                 if (checked) {
-                    region.setEnabled(true);
-                    region.setHint("COP (Police)");
+                    empID.setEnabled(true);
+                    region.setHint("COP's County Address");
                 }
                 break;
             case R.id.radio_rta:
                 if (checked) {
-                    region.setEnabled(true);
-                    region.setHint("DMV Officer");
+                    empID.setEnabled(true);
+                    region.setHint("DMV Office Address");
                 }
                 break;
             case R.id.radio_ambulance:
                 if (checked) {
-                    region.setEnabled(true);
-                    region.setHint("Hospital Name");
+                    empID.setEnabled(true);
+                    region.setHint("Hospital Address");
                 }
                 break;
             case R.id.radio_other:
                 if (checked) {
-                    region.setEnabled(false);
+                    empID.setEnabled(false);
+                    empID.setText("");
+                    region.setHint("Address");
                 }
                 break;
         }
@@ -151,18 +155,18 @@ public class RegistrationActivity extends AppCompatActivity {
         cregion = region.getText().toString().trim();
         coccupation = radioButton.getText().toString().trim();
 
-        if (cname.isEmpty() || pwd.isEmpty() || cemail.isEmpty() || cempID.isEmpty()
+//        Pattern cphone
+
+        if (cname.isEmpty() || pwd.isEmpty() || cemail.isEmpty() || coccupation.equals("Volunteer")?false:(cempID.isEmpty()?true:false)
                 || cphone.isEmpty() || coccupation.isEmpty())
         {
             progressDialog.dismiss();
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }
-
-        else if (cregion.isEmpty()){
-            cregion = "";
+        else if (cempID.isEmpty()){
+            cempID = "0";
             flag = true;
         }
-
         else {
             flag = true;
         }
@@ -197,6 +201,8 @@ public class RegistrationActivity extends AppCompatActivity {
         DatabaseReference myRef = firebaseDatabase.getReference("User").child(firebaseAuth.getUid());
         UserProfile userProfile = new UserProfile(cname, cempID, cemail, cphone, coccupation, cregion, pwd);
         myRef.setValue(userProfile);
+        Toast.makeText(RegistrationActivity.this, "Data Inserted Successfully",Toast.LENGTH_SHORT).show();
+
     }
 
 }
