@@ -26,3 +26,9 @@
 7. Added Access File Activities Business Logic. ---------------->   (Bindusree, Penamalli)
 8. Added Profile Activity Business Logic.-------------------------->(Vengalarao Yeluri)
 9. Added Change Password Activities Business Logic.---------------->(Vengalarao Yeluri)
+
+
+####### Milestone -> 3
+1. Updated some validations and hint messages.    -----------------> (Murali Krishna, Sundari)
+2. Added some firebase dependencies and did
+   some modifications in landing page.            -----------------> (Murali Krishna, Sundari)
