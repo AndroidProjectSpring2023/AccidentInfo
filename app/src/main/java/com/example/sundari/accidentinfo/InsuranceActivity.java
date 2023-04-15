@@ -36,9 +36,9 @@ public class InsuranceActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(InsuranceActivity.this , InsuranceInfoActivity.class);
-//                intent.putExtra("InsuranceCompany" , insuranceCompany[i]);
-//                startActivity(intent);
+                Intent intent = new Intent(InsuranceActivity.this , InsuranceInfoActivity.class);
+                intent.putExtra("InsuranceCompany" , insuranceCompany[i]);
+                startActivity(intent);
             }
         });
 

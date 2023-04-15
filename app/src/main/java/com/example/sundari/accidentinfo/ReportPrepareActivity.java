@@ -1,5 +1,6 @@
 package com.example.sundari.accidentinfo;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -18,6 +19,10 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -122,15 +127,40 @@ public class ReportPrepareActivity extends AppCompatActivity {
     private void openFileChooserImg() {
         Intent intent = new Intent();
         intent.setType("image/*");
+        intent.putExtra("requestCode", PICK_IMAGE_REQUEST);
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
+//        startActivityResultLauncher.launch(intent);
     }
     private void openFileChooserVideo() {
         Intent intent = new Intent();
         intent.setType("video/*");
+        intent.putExtra("requestCode", PICK_VIDEO_REQUEST);
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, PICK_VIDEO_REQUEST);
-    }
+//        startActivityResultLauncher.launch(intent);
+        }
+
+//    ActivityResultLauncher<Intent> startActivityResultLauncher = registerForActivityResult(
+//            new ActivityResultContracts.StartActivityForResult(),
+//            new ActivityResultCallback<ActivityResult>() {
+//                @Override
+//                public void onActivityResult(ActivityResult result) {
+//                    if (result.getResultCode() == Activity.RESULT_OK) {
+//                        // Here, no request code
+//                        Intent data = result.getData();
+//                        if(data!=null && data.getData()!=null){
+//                            if(data.getIntExtra("requestCode",0) == PICK_IMAGE_REQUEST){
+//                                mImageUri = data.getData();
+//                                imageView.setImageURI(mImageUri);
+//                            } else if(data.getIntExtra("requestCode",0) == PICK_VIDEO_REQUEST){
+//                                mVideoUri = data.getData();
+//                            }
+//
+//                        }
+//                    }
+//                }
+//            });
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
