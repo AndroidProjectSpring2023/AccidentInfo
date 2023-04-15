@@ -33,4 +33,20 @@
 2. Added some firebase dependencies and did
    some modifications in landing page.            -----------------> (Murali Krishna, Sundari)
 3. Added App Logo.                                -----------------> (Murali Krishna, Sundari)
-4. 
+
+
+###################
+
+App Name: AccidentInfo
+
+Min SDK    : 28
+Target SDK : 33
+Dependency Requested Version : 1.4.0
+Gradle Version: 7.4
+Gradle Plugin Version : 7.3.1
+
+
+Login Credentials : pavilionsmk@gmail.com
+Password : Murali@3445
+if you want you can register and login.
+
