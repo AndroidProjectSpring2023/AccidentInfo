@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+//import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -23,8 +23,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.regex.Pattern;
-
 public class RegistrationActivity extends AppCompatActivity {
 
     private TextView textView , login;
@@ -32,7 +30,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private RadioButton radioButton;
     private EditText name , empID , email , phone , password , region;
     private Button register;
-    private ProgressBar progressBar;
+//    private ProgressBar progressBar;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
@@ -55,17 +53,17 @@ public class RegistrationActivity extends AppCompatActivity {
         password = findViewById(R.id.et_RegPwd);
         region = findViewById(R.id.et_region);
         register = findViewById(R.id.btn_Register);
-        progressBar = findViewById(R.id.progress_Bar);
+//        progressBar = findViewById(R.id.progress_Bar);
 
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this);
 
-//        region.setEnabled(false);
+//        empID.setEnabled(false);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
+//                progressBar.setVisibility(View.VISIBLE);
                 radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
                 register();
             }
@@ -106,7 +104,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     region.setHint("Hospital Address");
                 }
                 break;
-            case R.id.radio_other:
+            case R.id.radio_Volunteer:
                 if (checked) {
                     empID.setEnabled(false);
                     empID.setText("");
@@ -127,13 +125,14 @@ public class RegistrationActivity extends AppCompatActivity {
             firebaseAuth.createUserWithEmailAndPassword(user_email , user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    progressBar.setVisibility(View.GONE);
+//                    progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
-                        FirebaseUser user = firebaseAuth.getCurrentUser();
+//                        FirebaseUser user = firebaseAuth.getCurrentUser();
                         sendEmailVerification();
 
                     } else {
-                        Toast.makeText(RegistrationActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show(); }
+
+                        Toast.makeText(RegistrationActivity.this,task.getException().getMessage().toString() , Toast.LENGTH_SHORT).show(); }
 
                 }
             });
@@ -164,7 +163,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }
         else if (cempID.isEmpty()){
-            cempID = "0";
+            cempID = "-1";
             flag = true;
         }
         else {

@@ -56,7 +56,7 @@ public class ReportPrepareActivity extends AppCompatActivity {
     private StorageTask mUploadTask;
     long imgName;
     String vName, vAge,injuries, reason, policyNO, location, insuCompany;
-    private int fileName = randomNum();
+    private final int fileName = randomNum();
     private int randomNum(){
         Random random = new Random();
         int nextInt = random.nextInt(100000);

@@ -115,7 +115,7 @@
             android:text="AMBULANCE" />
 
         <RadioButton
-            android:id="@+id/radio_other"
+            android:id="@+id/radio_Volunteer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"

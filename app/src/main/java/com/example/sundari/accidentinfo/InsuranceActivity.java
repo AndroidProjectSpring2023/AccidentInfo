@@ -15,7 +15,7 @@ public class InsuranceActivity extends AppCompatActivity {
 
     private ListView listView;
 
-    String insuranceCompany[] = new String[] {"State Farm Group" , "Berkshire Hathaway Ins",
+    String[] insuranceCompany = new String[] {"State Farm Group" , "Berkshire Hathaway Ins",
             "Progressive Ins Group" , "Allstate Ins Group" , "Liberty Mutual Ins Cos"};
 
 
