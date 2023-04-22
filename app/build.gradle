@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.example.sundari.accidentinfo'
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.example.sundari.accidentinfo"
-        minSdk 28
-        targetSdk 33
+        minSdk 26
+        targetSdk 32
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -55,4 +55,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:20.1.0'
 //    implementation 'com.google.firebase:firebase-ui-storage:4.3.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 }
