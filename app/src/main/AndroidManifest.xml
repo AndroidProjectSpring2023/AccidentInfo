@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AccidentInfo"
         tools:targetApi="31">
-
+        <activity
+            android:name=".UpdateVictimReportActivity"
+            android:exported="false"
+            android:label="Update Victim"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -29,7 +39,9 @@
         </activity>
         <activity
             android:name=".RegistrationActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="User Registration"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -44,104 +56,121 @@
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_home"
-            android:theme="@style/Theme.AccidentInfo.NoActionBar">
+            android:label="Accident Information"
+            android:theme="@style/Theme.AccidentInfo.WithActionBarAndWithTile">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
         <activity
             android:name=".ReportPrepareActivity"
-            android:exported="false"><meta-data
-            android:name="android.app.lib_name"
-            android:value="" /></activity>
+            android:exported="false"
+            android:label="Creating Report"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".InsuranceActivity"
-            android:exported="false"><meta-data
-            android:name="android.app.lib_name"
-            android:value="" /></activity>
+            android:exported="false"
+            android:label="Insurance Companies"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".InsuranceInfoActivity"
-            android:exported="false"><meta-data
-            android:name="android.app.lib_name"
-            android:value="" /></activity>
+            android:exported="false"
+            android:label="Associated Victims"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".AccessFileActivity"
+            android:exported="false"
+            android:label="Reports"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false"
+            android:label="Profile"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ChangePwdActivity"
+            android:exported="false"
+            android:label="Change Password"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Accident_Info"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-         android:name=".ProfileActivity"
-         android:exported="false">
-        <meta-data
-         android:name="android.app.lib_name"
-         android:value="" />
+            android:name=".Upload"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
-         android:name=".ChangePwdActivity"
-         android:exported="false">
-        <meta-data
-         android:name="android.app.lib_name"
-         android:value="" />
-        </activity>
-
-        <activity
-        android:name=".Accident_Info"
-         android:exported="false">
-        <meta-data
-        android:name="android.app.lib_name"
-        android:value="" />
+            android:name=".ImageAdapter"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
-        android:name=".Upload"
-        android:exported="false">
-        <meta-data
-        android:name="android.app.lib_name"
-        android:value="" />
-    </activity>
+            android:name=".ImageActivity"
+            android:exported="false"
+            android:label="Incidents Image Footage"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
-        android:name=".ImageAdapter"
-        android:exported="false">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
-    <activity
-        android:name=".ImageActivity"
-        android:exported="false"
-        android:label="@string/title_activity_image"
-        android:theme="@style/Theme.AccidentInfo.NoActionBar">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
-
-    <activity
-        android:name=".VideoActivity"
-        android:exported="false">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
-
-    <activity
-        android:name=".VideoAdapter"
-        android:exported="false">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
-
-    <activity
-        android:name=".InformationActivity"
-        android:exported="false">
-        <meta-data
-            android:name="android.app.lib_name"
-            android:value="" />
-    </activity>
+            android:name=".VideoActivity"
+            android:exported="false"
+            android:label="Incidents Video Footage"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".VideoAdapter"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".InformationActivity"
+            android:exported="false"
+            android:label="Victim Report"
+            android:theme="@style/Theme.AccidentInfo.ActionBar">>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
     </application>
 
 </manifest>
