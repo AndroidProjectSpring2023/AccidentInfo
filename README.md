@@ -33,6 +33,18 @@
 2. Added some firebase dependencies and did
    some modifications in landing page.            -----------------> (Murali Krishna, Sundari)
 3. Added App Logo.                                -----------------> (Murali Krishna, Sundari)
+4. Created an Adapter and Recycler item to 
+   represent data in access files activity.       -----------------> (Murali Krishna, Sundari)
+5. Implemented update activity for created
+   victim reports.                                -----------------> (Murali Krishna, Sundari)
+6. Created a progress layout for progress bar.    -----------------> (Murali Krishna, Sundari)
+7. Added victim image in individual victim report.-----------------> (Murali Krishna, Sundari)
+8. Implemented victim image and preview in create
+   victim report page.                            -----------------> (Murali Krishna, Sundari)
+9. Made progress bar related changes in application. --------------> (Murali Krishna, Sundari)
+10. Implemented searching record mechanism in access files tab ----> (Murali Krishna, Sundari)
+11. Added background image across entire application. -------------> (Murali Krishna, Sundari)
+12. Updated titles for all activities in Manifest file. -----------> (Murali Krishna, Sundari)
 
 
 ###################
