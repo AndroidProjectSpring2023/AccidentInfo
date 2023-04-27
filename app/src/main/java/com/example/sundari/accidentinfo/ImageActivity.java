@@ -1,11 +1,12 @@
 package com.example.sundari.accidentinfo;
 
-import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,7 +24,8 @@ public class ImageActivity extends AppCompatActivity {
     private RecyclerView rv_Images;
     private DatabaseReference myRef;
     private ImageAdapter imageAdapter;
-    public ProgressDialog progressDialog;
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
 
     private ArrayList<String> mUpload;
 
@@ -38,11 +40,11 @@ public class ImageActivity extends AppCompatActivity {
         rv_Images.setHasFixedSize(true);
         rv_Images.setLayoutManager(new LinearLayoutManager(this));
 
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading....");
-        progressDialog.show();
+        builder = new AlertDialog.Builder(ImageActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        dialog = builder.create();
+        dialog.show();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
@@ -58,7 +60,7 @@ public class ImageActivity extends AppCompatActivity {
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     for (DataSnapshot d : ds.getChildren()){
-                        if (d.getKey().equals("ImageUrl")) {
+                        if (d.getKey().equals("imageUrl")) {
                             String s = d.getValue(String.class);
                             mUpload.add(s);
                         }
@@ -71,14 +73,14 @@ public class ImageActivity extends AppCompatActivity {
                 imageAdapter = new ImageAdapter(ImageActivity.this , mUpload);
                 rv_Images.setAdapter(imageAdapter);
 
-                progressDialog.dismiss();
+                dialog.dismiss();
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(ImageActivity.this , databaseError.toString() , Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                Toast.makeText(ImageActivity.this , databaseError.getMessage() , Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
 

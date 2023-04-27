@@ -1,18 +1,17 @@
 package com.example.sundari.accidentinfo;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-//import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,11 +29,11 @@ public class RegistrationActivity extends AppCompatActivity {
     private RadioButton radioButton;
     private EditText name , empID , email , phone , password , region;
     private Button register;
-//    private ProgressBar progressBar;
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private ProgressDialog progressDialog;
     String cemail, cname, pwd, cempID, cphone, cregion, coccupation;
 
 
@@ -53,17 +52,18 @@ public class RegistrationActivity extends AppCompatActivity {
         password = findViewById(R.id.et_RegPwd);
         region = findViewById(R.id.et_region);
         register = findViewById(R.id.btn_Register);
-//        progressBar = findViewById(R.id.progress_Bar);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        progressDialog = new ProgressDialog(this);
 
-//        empID.setEnabled(false);
+        builder = new AlertDialog.Builder(RegistrationActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        dialog = builder.create();
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                progressBar.setVisibility(View.VISIBLE);
+                dialog.show();
                 radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
                 register();
             }
@@ -116,8 +116,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
     private void register() {
-        progressDialog.setMessage("Loading....");
-        progressDialog.show();
         if (validate()) {
             //Upload data to the database
             String user_email = email.getText().toString().trim();
@@ -125,14 +123,12 @@ public class RegistrationActivity extends AppCompatActivity {
             firebaseAuth.createUserWithEmailAndPassword(user_email , user_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-//                    progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
-//                        FirebaseUser user = firebaseAuth.getCurrentUser();
                         sendEmailVerification();
 
                     } else {
 
-                        Toast.makeText(RegistrationActivity.this,task.getException().getMessage().toString() , Toast.LENGTH_SHORT).show(); }
+                        Toast.makeText(RegistrationActivity.this,task.getException().getMessage() , Toast.LENGTH_SHORT).show(); }
 
                 }
             });
@@ -154,12 +150,11 @@ public class RegistrationActivity extends AppCompatActivity {
         cregion = region.getText().toString().trim();
         coccupation = radioButton.getText().toString().trim();
 
-//        Pattern cphone
 
         if (cname.isEmpty() || pwd.isEmpty() || cemail.isEmpty() || coccupation.equals("Volunteer")?false:(cempID.isEmpty()?true:false)
                 || cphone.isEmpty() || coccupation.isEmpty())
         {
-            progressDialog.dismiss();
+            dialog.dismiss();
             Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show();
         }
         else if (cempID.isEmpty()){
@@ -180,15 +175,15 @@ public class RegistrationActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        progressDialog.dismiss();
+                        dialog.dismiss();
                         sendUserData();
                         Toast.makeText(RegistrationActivity.this, "Successfully Registered, Verification mail sent!", Toast.LENGTH_SHORT).show();
                         firebaseAuth.signOut();
                         finish();
                         startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
                     } else {
-                        progressDialog.dismiss();
-                        Toast.makeText(RegistrationActivity.this, "Verification mail has'nt been sent!", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        Toast.makeText(RegistrationActivity.this, "Verification mail has not been sent!", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

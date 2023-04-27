@@ -1,6 +1,6 @@
 package com.example.sundari.accidentinfo;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,8 +26,9 @@ public class ProfileActivity extends AppCompatActivity {
     private Button  ChangePwd;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
-    private ProgressDialog progressDialog;
     private DatabaseReference databaseReference;
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
     String Uid;
 
     @Override
@@ -46,11 +48,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        progressDialog = new ProgressDialog(this);
-
-        progressDialog.setMessage("Loading!");
-        progressDialog.show();
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(ProfileActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
+        dialog.show();
         Uid = firebaseAuth.getUid();
         databaseReference = firebaseDatabase.getReference("User").child(Uid);
 
@@ -58,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-                progressDialog.dismiss();
+                dialog.dismiss();
 
                 profileName.setText("Name   : " + userProfile.getUserName());
                 profileEmpID.setText("EmpID  : " + userProfile.getUserEmpID());

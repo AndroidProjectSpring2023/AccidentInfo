@@ -1,32 +1,33 @@
 package com.example.sundari.accidentinfo;
 
-import android.content.Intent;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class AccessFileActivity extends AppCompatActivity {
 
-    private ListView listView;
+    private RecyclerView recyclerView;
     private DatabaseReference databaseReference;
     private ArrayList<String> fileNames;
+    List<Accident_Info> dataList;
+    MyAdapter adapter;
+    SearchView searchView;
 
 
     @Override
@@ -34,83 +35,60 @@ public class AccessFileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_access_file);
 
-        listView = findViewById(R.id.lv_fileNames);
+        dataList = new ArrayList<>();
+        adapter = new MyAdapter(AccessFileActivity.this, dataList);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        searchView = findViewById(R.id.search);
+        searchView.clearFocus();
+
+
+        GridLayoutManager layoutManagerObject = new GridLayoutManager(AccessFileActivity.this,1);
+        recyclerView.setLayoutManager(layoutManagerObject);
+        AlertDialog.Builder builder = new AlertDialog.Builder(AccessFileActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        recyclerView.setAdapter(adapter);
 
         databaseReference = FirebaseDatabase.getInstance().getReference("information");
-        fileNames = new ArrayList<>();
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fileNames);
-
-
-       databaseReference.addValueEventListener(new ValueEventListener() {
+        dialog.show();
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                fileNames.add(dataSnapshot.getKey());
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                dataList.clear();
+                for (DataSnapshot itemSnapshot: snapshot.getChildren()){
+                    Accident_Info dataClass = itemSnapshot.getValue(Accident_Info.class);
+                    dataClass.setKey(itemSnapshot.getKey());
+                    dataList.add(dataClass);
+                }
+                Log.d("Data: ",dataList.toString());
                 adapter.notifyDataSetChanged();
-
+                dialog.dismiss();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(AccessFileActivity.this , databaseError.toString() , Toast.LENGTH_SHORT).show();
+            public void onCancelled(@NonNull DatabaseError error) {
+                dialog.dismiss();
+                Toast.makeText(AccessFileActivity.this , error.getMessage() , Toast.LENGTH_SHORT).show();
             }
         });
 
-
-
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                // Info info = new Info();
-
-                fileNames.add(dataSnapshot.getKey());
-                adapter.notifyDataSetChanged();
-
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
-
             @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                adapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(AccessFileActivity.this , databaseError.toString() , Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Intent intent = new Intent(AccessFileActivity.this , InformationActivity.class);
-                intent.putExtra("fileName" , listView.getItemAtPosition(i).toString());
-                startActivity(intent);
+            public boolean onQueryTextChange(String newText) {
+                searchList(newText);
+                return true;
             }
         });
 
     }
-
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -121,5 +99,14 @@ public class AccessFileActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void searchList(String text){
+        ArrayList<Accident_Info> searchList = new ArrayList<>();
+        for (Accident_Info dataClass: dataList){
+            if (dataClass.getvName().toLowerCase().contains(text.toLowerCase())){
+                searchList.add(dataClass);
+            }
+        }
+        adapter.searchDataList(searchList);
     }
 }

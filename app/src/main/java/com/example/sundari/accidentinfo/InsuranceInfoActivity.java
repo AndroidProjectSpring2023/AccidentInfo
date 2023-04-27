@@ -1,6 +1,6 @@
 package com.example.sundari.accidentinfo;
 
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.ChildEventListener;
@@ -27,7 +28,8 @@ public class InsuranceInfoActivity extends AppCompatActivity {
     private ListView listView;
 
     private DatabaseReference databaseReference;
-    private ProgressDialog progressDialog;
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
 
     private ArrayList<String> fileNames;
 
@@ -41,9 +43,11 @@ public class InsuranceInfoActivity extends AppCompatActivity {
         listView = findViewById(R.id.lv_insuFiles);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading.....");
-        progressDialog.show();
+        builder = new AlertDialog.Builder(InsuranceInfoActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        dialog = builder.create();
+        dialog.show();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
@@ -87,7 +91,7 @@ public class InsuranceInfoActivity extends AppCompatActivity {
         });
 
         listView.setAdapter(adapter);
-        progressDialog.dismiss();
+        dialog.dismiss();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

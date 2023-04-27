@@ -1,6 +1,5 @@
 package com.example.sundari.accidentinfo;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +25,8 @@ public class LoginActivity extends AppCompatActivity {
     private int counter = 5;
     private TextView userRegistration;
     private FirebaseAuth firebaseAuth;
-    private ProgressDialog progressDialog;
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
     private TextView forgotPassword , insuAgent;
     static int i;
 
@@ -46,8 +47,13 @@ public class LoginActivity extends AppCompatActivity {
         Info.setText("No of attempts remaining: 5");
 
         firebaseAuth = FirebaseAuth.getInstance();
-        progressDialog = new ProgressDialog(this);
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
+        builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        dialog = builder.create();
+
 
         if(user != null){
             finish();
@@ -85,15 +91,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private void validate(String userEmail, String userPassword) {
 
-        progressDialog.setMessage("loading!");
-        progressDialog.show();
+        dialog.show();
 
         if (userEmail.isEmpty() || userPassword.isEmpty()){
             Toast.makeText(this, "Please enter the details", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
+            dialog.dismiss();
         }
         else if (userEmail.equals("Admin") && userPassword.equals("password")){
-            progressDialog.dismiss();
+            dialog.dismiss();
             finish();
             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
@@ -103,13 +108,13 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        progressDialog.dismiss();
+                        dialog.dismiss();
                         checkEmailVerification();
                     } else {
                         Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                         counter--;
                         Info.setText("No of attempts remaining: " + counter);
-                        progressDialog.dismiss();
+                        dialog.dismiss();
                         if (counter == 0) {
                             Login.setEnabled(false);
                         }

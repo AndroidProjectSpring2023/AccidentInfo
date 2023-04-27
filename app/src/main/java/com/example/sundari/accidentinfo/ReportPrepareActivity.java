@@ -1,12 +1,13 @@
 package com.example.sundari.accidentinfo;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -16,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -40,20 +40,23 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.Random;
 public class ReportPrepareActivity extends AppCompatActivity {
-    private static final int PICK_IMAGE_REQUEST = 1;
+    private static int PICK_IMAGE_REQUEST = 1;
     private static final int PICK_VIDEO_REQUEST = 2;
     private ProgressBar mProgressBar;
-    private Button chooseImg, chooseVideo, uploadImages, uploadVideos, submit;
-    private ImageView imageView;
-    private EditText et_Name, et_Age ,et_injuries, et_reason, et_policyNO, et_location;
+    private Button chooseVictimImage, chooseImg, chooseVideo, uploadImages, uploadVideos, submit;
+    private ImageView imageView, victimImageView;
+    private EditText et_Name, et_Age ,et_injuries, et_reason, et_policyNO, et_location, et_Other_Insurance_Agent;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
-    private TextView textView;
-    private Uri mImageUri , mVideoUri;
-    private ProgressDialog progressDialog;
+    private Uri mImageUri , mVideoUri, victimImageUri;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef , myRef;
-    private StorageTask mUploadTask;
+    String victimImageURL;
+    AlertDialog.Builder builder;
+    AlertDialog dialog;
+
+
+    private StorageTask mUploadTask,victimMUploadTask;
     long imgName;
     String vName, vAge,injuries, reason, policyNO, location, insuCompany;
     private final int fileName = randomNum();
@@ -66,11 +69,17 @@ public class ReportPrepareActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_prepare);
         mProgressBar = findViewById(R.id.progress_Bar);
+
         chooseImg = findViewById(R.id.btn_choose_Image);
         chooseVideo = findViewById(R.id.btn_choose_Video);
+        chooseVictimImage = findViewById(R.id.btn_chooseVictimImage);
+
         imageView = findViewById(R.id.img_view);
+        victimImageView = findViewById(R.id.victim_image_view);
+
         uploadImages = findViewById(R.id.btn_uploadImages);
         uploadVideos = findViewById(R.id.btn_uploadVideos);
+
         submit = findViewById(R.id.btn_submitData);
         et_Name = findViewById(R.id.et_VictimName);
         et_Age = findViewById(R.id.et_VictimAge);
@@ -78,12 +87,49 @@ public class ReportPrepareActivity extends AppCompatActivity {
         et_reason = findViewById(R.id.et_Reason);
         et_location = findViewById(R.id.et_location);
         et_policyNO = findViewById(R.id.et_Policy);
+
         radioGroup = findViewById(R.id.radio_InsuCompany);
         radioButton = findViewById(R.id.radio_NoInsu);
-        progressDialog = new ProgressDialog(this);
+        et_Other_Insurance_Agent.setEnabled(false);
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mStorageRef = FirebaseStorage.getInstance().getReference("files");
         et_policyNO.setEnabled(false);
+
+        builder = new AlertDialog.Builder(ReportPrepareActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        dialog = builder.create();
+
+        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK){
+                            Intent data = result.getData();
+                            victimImageUri = data.getData();
+                            Log.d("TAG", "victimImageUri: "+victimImageUri);
+                            victimImageView.setImageURI(victimImageUri);
+                        } else {
+                            Toast.makeText(ReportPrepareActivity.this, "No Victim Image Selected", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
+        chooseVictimImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent photoPicker = new Intent(Intent.ACTION_PICK);
+                photoPicker.setType("image/*");
+                activityResultLauncher.launch(photoPicker);
+            }
+        });
+
+
         chooseImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +166,8 @@ public class ReportPrepareActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 radioButton = findViewById(radioGroup.getCheckedRadioButtonId());
-                uploadData();
+                dialog.show();
+                saveVictimData();
             }
         });
     }
@@ -130,7 +177,6 @@ public class ReportPrepareActivity extends AppCompatActivity {
         intent.putExtra("requestCode", PICK_IMAGE_REQUEST);
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
-//        startActivityResultLauncher.launch(intent);
     }
     private void openFileChooserVideo() {
         Intent intent = new Intent();
@@ -138,29 +184,8 @@ public class ReportPrepareActivity extends AppCompatActivity {
         intent.putExtra("requestCode", PICK_VIDEO_REQUEST);
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, PICK_VIDEO_REQUEST);
-//        startActivityResultLauncher.launch(intent);
-        }
+    }
 
-//    ActivityResultLauncher<Intent> startActivityResultLauncher = registerForActivityResult(
-//            new ActivityResultContracts.StartActivityForResult(),
-//            new ActivityResultCallback<ActivityResult>() {
-//                @Override
-//                public void onActivityResult(ActivityResult result) {
-//                    if (result.getResultCode() == Activity.RESULT_OK) {
-//                        // Here, no request code
-//                        Intent data = result.getData();
-//                        if(data!=null && data.getData()!=null){
-//                            if(data.getIntExtra("requestCode",0) == PICK_IMAGE_REQUEST){
-//                                mImageUri = data.getData();
-//                                imageView.setImageURI(mImageUri);
-//                            } else if(data.getIntExtra("requestCode",0) == PICK_VIDEO_REQUEST){
-//                                mVideoUri = data.getData();
-//                            }
-//
-//                        }
-//                    }
-//                }
-//            });
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -297,18 +322,38 @@ public class ReportPrepareActivity extends AppCompatActivity {
                 }
         }
     }
+    public void saveVictimData(){
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Android Images")
+                .child(victimImageUri.getLastPathSegment());
+
+        storageReference.putFile(victimImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                while (!uriTask.isComplete());
+                Uri urlImage = uriTask.getResult();
+                victimImageURL = urlImage.toString();
+                dialog.show();
+                uploadData();
+                dialog.dismiss();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                dialog.dismiss();
+            }
+        });
+    }
     private void uploadData() {
-        progressDialog.setMessage("Loading....");
-        progressDialog.show();
         if (validate()) {
             //Upload data to the database
             myRef = FirebaseDatabase.getInstance().getReference("information/" + fileName);
-            Accident_Info info = new Accident_Info(vName , vAge , reason , location , injuries , insuCompany , policyNO , fileName);
+            Accident_Info info = new Accident_Info(vName , vAge , reason , location , injuries , insuCompany , policyNO , fileName, victimImageURL );
             myRef.setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
-                        progressDialog.dismiss();
                         Toast.makeText(ReportPrepareActivity.this , "Successfully Submitted the Information" , Toast.LENGTH_SHORT).show();
                         onBackPressed();
                     }
@@ -317,10 +362,9 @@ public class ReportPrepareActivity extends AppCompatActivity {
                 }
             });
         }
-        else
-            Toast.makeText(this, "Please enter the required details", Toast.LENGTH_SHORT).show();
     }
     private boolean validate() {
+
         Boolean flag = false;
         vName = et_Name.getText().toString().trim();
         vAge = et_Age.getText().toString().trim();
@@ -328,9 +372,12 @@ public class ReportPrepareActivity extends AppCompatActivity {
         location = et_location.getText().toString().trim();
         injuries = et_injuries.getText().toString().trim();
         policyNO = et_policyNO.getText().toString().trim();
-        insuCompany = radioButton.getText().toString().trim();
-        if (vName.isEmpty() || vAge.isEmpty() || reason.isEmpty() || location.isEmpty() || injuries.isEmpty()) {
-            progressDialog.dismiss();
+        insuCompany = radioButton.getText().toString().trim();if(victimImageURL.isEmpty()){
+            dialog.dismiss();
+            Toast.makeText(this, "Please upload victim image", Toast.LENGTH_SHORT).show();
+
+        } else if (vName.isEmpty() || vAge.isEmpty() || reason.isEmpty() || location.isEmpty() || injuries.isEmpty()) {
+            dialog.dismiss();
             Toast.makeText(this, "Please enter the required details", Toast.LENGTH_SHORT).show();
         }
         else if (policyNO.isEmpty() || insuCompany.isEmpty()){

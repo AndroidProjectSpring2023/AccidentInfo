@@ -1,8 +1,8 @@
 package com.example.sundari.accidentinfo;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +29,8 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
-    private ProgressDialog progressDialog;
+    private AlertDialog.Builder builder;
+    private AlertDialog dialog;
     private UserProfile userProfile = null;
 
     @Override
@@ -44,15 +46,17 @@ public class HomeActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        progressDialog = new ProgressDialog(this);
+        builder = new AlertDialog.Builder(HomeActivity.this);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        dialog = builder.create();
 
 
         if(firebaseAuth.getUid() != null) {
             databaseReference = firebaseDatabase.getReference("User").child(firebaseAuth.getUid());
         }
 
-        progressDialog.setMessage("Loading!");
-        progressDialog.show();
+        dialog.show();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -61,10 +65,11 @@ public class HomeActivity extends AppCompatActivity {
                 userProfile = dataSnapshot.getValue(UserProfile.class);
                 if (userProfile != null) {
                     textView.setText("Welcome , " + userProfile.getUserName() );
+                    textView.setTextColor(Color.parseColor("#000000"));
                     if(userProfile.userOccupation.equals("Other")){
                         accessFile.setVisibility(View.INVISIBLE);
                     }
-                    progressDialog.dismiss();
+                    dialog.dismiss();
                 }
             }
 
