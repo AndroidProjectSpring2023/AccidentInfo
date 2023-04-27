@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/plain_blue_background_image"
     tools:context=".ImageActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/image_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:scrollbars="vertical"/>
 
 
 </RelativeLayout>
