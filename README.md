@@ -36,15 +36,15 @@
 4. Created an Adapter and Recycler item to 
    represent data in access files activity.       -----------------> (Murali Krishna, Sundari)
 5. Implemented update activity for created
-   victim reports.                                -----------------> (Murali Krishna, Sundari)
-6. Created a progress layout for progress bar.    -----------------> (Murali Krishna, Sundari)
-7. Added victim image in individual victim report.-----------------> (Murali Krishna, Sundari)
+   victim reports.                                -----------------> (Prudhvi Raju, Ranga)
+6. Created a progress layout for progress bar.    -----------------> (Prudhvi Raju, Ranga)
+7. Added victim image in individual victim report.-----------------> (Bindusree, Penamalli)
 8. Implemented victim image and preview in create
-   victim report page.                            -----------------> (Murali Krishna, Sundari)
-9. Made progress bar related changes in application. --------------> (Murali Krishna, Sundari)
-10. Implemented searching record mechanism in access files tab ----> (Murali Krishna, Sundari)
-11. Added background image across entire application. -------------> (Murali Krishna, Sundari)
-12. Updated titles for all activities in Manifest file. -----------> (Murali Krishna, Sundari)
+   victim report page.                            -----------------> (Bindusree, Penamalli)
+9. Made progress bar related changes in application. --------------> (Prudhvi Raju, Ranga)
+10. Implemented searching record mechanism in access files tab ----> (Vengalarao Yeluri)
+11. Added background image across entire application. -------------> (Vengalarao Yeluri)
+12. Updated titles for all activities in Manifest file. -----------> (Vengalarao Yeluri)
 
 
 ###################
