@@ -5,10 +5,28 @@ public class Accident_Info {
     private String vName , vAge , reason , location , injuries , incuranceCompany , policy_No;
     private int  fileName;
 
+    private String key, vImage;
+
+    public String getvImage() {
+        return vImage;
+    }
+
+    public void setvImage(String vImage) {
+        this.vImage = vImage;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public Accident_Info() {
     }
 
-    public Accident_Info(String vName, String vAge , String reason, String location, String injuries, String incuranceCompany, String policy_No, int fileName) {
+    public Accident_Info(String vName, String vAge , String reason, String location, String injuries, String incuranceCompany, String policy_No, int fileName, String vImage) {
         this.vName = vName;
         this.vAge = vAge;
         this.reason = reason;
@@ -17,6 +35,7 @@ public class Accident_Info {
         this.incuranceCompany = incuranceCompany;
         this.policy_No = policy_No;
         this.fileName = fileName;
+        this.vImage = vImage;
     }
 
     public String getvName() {
