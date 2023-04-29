@@ -92,7 +92,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_RegFor"
         app:layout_constraintVertical_bias="0.0">
 
-
         <RadioButton
             android:id="@+id/radio_police"
             android:layout_width="wrap_content"
@@ -101,19 +100,13 @@
             android:checked="true"
             android:text="COP" />
 
-        <RadioButton
-            android:id="@+id/radio_rta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="DMV OFFICER" />
 
         <RadioButton
             android:id="@+id/radio_ambulance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onRadioButtonClicked"
-            android:text="AMBULANCE" />
+            android:text="AMBULANCE STAFF" />
 
         <RadioButton
             android:id="@+id/radio_Volunteer"

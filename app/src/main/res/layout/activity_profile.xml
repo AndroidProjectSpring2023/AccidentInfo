@@ -64,23 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvProfileEmpID"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btnPwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Change Password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvProfileRegion"
-        app:layout_constraintVertical_bias="0.287" />
-
-    <TextView
+        <TextView
         android:id="@+id/tvProfilePhone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -129,9 +113,23 @@
         app:layout_constraintTop_toBottomOf="@+id/tvProfileOccu"
         app:layout_constraintVertical_bias="0.0" />
 
+        <Button
+            android:id="@+id/btnPwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Change Password"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfileRegion"
+            app:layout_constraintVertical_bias="1.0" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

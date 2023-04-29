@@ -92,12 +92,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     region.setHint("COP's County Address");
                 }
                 break;
-            case R.id.radio_rta:
-                if (checked) {
-                    empID.setEnabled(true);
-                    region.setHint("DMV Office Address");
-                }
-                break;
             case R.id.radio_ambulance:
                 if (checked) {
                     empID.setEnabled(true);

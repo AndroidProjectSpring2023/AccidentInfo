@@ -31,7 +31,8 @@ public class InformationActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private Button editButton, saveOnUpdateButton, cancelButton;
     private Accident_Info info ;
-
+    private Intent i;
+    private boolean status;
     String fileName;
 
     @Override
@@ -54,6 +55,12 @@ public class InformationActivity extends AppCompatActivity {
 
 
 
+        i = getIntent();
+        status = i.getBooleanExtra("isVictimReportViewingByAgent",false);
+
+        if(status == true){
+            editButton.setVisibility(View.INVISIBLE);
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Bundle bundle = getIntent().getExtras();
@@ -74,7 +81,7 @@ public class InformationActivity extends AppCompatActivity {
 
                  info = dataSnapshot.getValue(Accident_Info.class);
                 if (info != null){
-                    Glide.with(InformationActivity.this).load(bundle.getString("Image")).into(im_VImage);
+                    Glide.with(InformationActivity.this).load(info.getvImage()).into(im_VImage);
                     tv_VName.append(info.getvName());
                     tv_VAge.append(info.getvAge());
                     tv_reason.append(info.getReason());

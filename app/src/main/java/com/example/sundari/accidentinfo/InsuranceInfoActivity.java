@@ -30,6 +30,8 @@ public class InsuranceInfoActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
+    private Intent i;
+    private boolean status;
 
     private ArrayList<String> fileNames;
 
@@ -41,6 +43,8 @@ public class InsuranceInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insurance_info);
 
         listView = findViewById(R.id.lv_insuFiles);
+        i = getIntent();
+        status = i.getBooleanExtra("isVictimReportViewingByAgent",false);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         builder = new AlertDialog.Builder(InsuranceInfoActivity.this);
@@ -99,6 +103,7 @@ public class InsuranceInfoActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(InsuranceInfoActivity.this , InformationActivity.class);
                 intent.putExtra("fileName" , listView.getItemAtPosition(i).toString());
+                intent.putExtra("isVictimReportViewingByAgent", status);
                 startActivity(intent);
             }
         });

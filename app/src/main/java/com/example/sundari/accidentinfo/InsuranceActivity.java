@@ -14,6 +14,8 @@ import android.widget.ListView;
 public class InsuranceActivity extends AppCompatActivity {
 
     private ListView listView;
+    private Intent i;
+    private boolean status;
 
     String[] insuranceCompany = new String[] {"State Farm Group" , "Berkshire Hathaway Ins",
             "Progressive Ins Group" , "Allstate Ins Group" , "Liberty Mutual Ins Cos"};
@@ -24,6 +26,8 @@ public class InsuranceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insurance);
 
+        i = getIntent();
+        status = i.getBooleanExtra("isVictimReportViewingByAgent",false);
         listView = findViewById(R.id.lv_InsuCompany);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -38,6 +42,7 @@ public class InsuranceActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(InsuranceActivity.this , InsuranceInfoActivity.class);
                 intent.putExtra("InsuranceCompany" , insuranceCompany[i]);
+                intent.putExtra("isVictimReportViewingByAgent", status);
                 startActivity(intent);
             }
         });
