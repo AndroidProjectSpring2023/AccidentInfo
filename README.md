@@ -63,7 +63,9 @@ Application(APK) should be run on Android Mobile inorder to achieve full functio
 
 Login Credentials : pavilionsmk@gmail.com
 Password : Murali@3445
+
 if you want you can register and login.
+i.e, After registration one should verify the verification link that has been sent to registered email.
 
 
 
