@@ -60,6 +60,7 @@ Gradle Plugin Version : 7.3.1
 ###################
 
 Application(APK) should be run on Android Mobile inorder to achieve full functionality(i.e, to upload images and videos).
+
 Login Credentials : pavilionsmk@gmail.com
 Password : Murali@3445
 if you want you can register and login.
