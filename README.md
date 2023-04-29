@@ -51,14 +51,18 @@
 
 App Name: AccidentInfo
 
-Min SDK    : 28
-Target SDK : 33
+Min SDK    : 26
+Target SDK : 32
 Dependency Requested Version : 1.4.0
 Gradle Version: 7.4
 Gradle Plugin Version : 7.3.1
 
+###################
 
+Application(APK) should be run on Android Mobile inorder to achieve full functionality(i.e, to upload images and videos).
 Login Credentials : pavilionsmk@gmail.com
 Password : Murali@3445
 if you want you can register and login.
+
+
 
