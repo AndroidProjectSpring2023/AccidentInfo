@@ -45,7 +45,7 @@ public class ReportPrepareActivity extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private Button chooseVictimImage, chooseImg, chooseVideo, uploadImages, uploadVideos, submit;
     private ImageView imageView, victimImageView;
-    private EditText et_Name, et_Age ,et_injuries, et_reason, et_policyNO, et_location, et_Other_Insurance_Agent;
+    private EditText et_Name, et_Age ,et_injuries, et_reason, et_policyNO, et_location;
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private Uri mImageUri , mVideoUri, victimImageUri;
@@ -90,7 +90,6 @@ public class ReportPrepareActivity extends AppCompatActivity {
 
         radioGroup = findViewById(R.id.radio_InsuCompany);
         radioButton = findViewById(R.id.radio_NoInsu);
-        et_Other_Insurance_Agent.setEnabled(false);
 
 
 
