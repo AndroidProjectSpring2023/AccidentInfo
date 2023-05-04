@@ -166,7 +166,7 @@
             android:name=".InformationActivity"
             android:exported="false"
             android:label="Victim Report"
-            android:theme="@style/Theme.AccidentInfo.NoActionBar">
+            android:theme="@style/Theme.AccidentInfo.ActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
