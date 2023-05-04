@@ -54,6 +54,7 @@ public class UpdateVictimReportActivity extends AppCompatActivity {
     private Uri mImageUri , mVideoUri, victimImageUri;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef ,databaseReferenceX, myRef;
+    private boolean status = false;
     String victimImageURL;
     AlertDialog.Builder builder;
     AlertDialog dialog;
@@ -89,7 +90,6 @@ public class UpdateVictimReportActivity extends AppCompatActivity {
         et_location = findViewById(R.id.et_location);
         et_policyNO = findViewById(R.id.et_Policy);
         radioGroup = findViewById(R.id.radio_InsuCompany);
-        radioButton = findViewById(R.id.radio_NoInsu);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mStorageRef = FirebaseStorage.getInstance().getReference("files");
@@ -101,7 +101,6 @@ public class UpdateVictimReportActivity extends AppCompatActivity {
         dialog = builder.create();
 
         Bundle bundle = getIntent().getExtras();
-
 
         int fileNameX = Integer.parseInt(bundle.getString("fileName"));
 
@@ -121,13 +120,37 @@ public class UpdateVictimReportActivity extends AppCompatActivity {
                     et_reason.append(info.getReason());
                     et_location.append(info.getLocation());
                     et_injuries.append(info.getInjuries());
-//                    .append(info.getIncuranceCompany());
-//                    radioButton.set
+                    String selectedInsuranceCompany = info.getIncuranceCompany();
+                    victimImageURL = info.getvImage();
 
-                    et_policyNO.append(info.getPolicy_No());
-                    dialog.dismiss();
+                    if(selectedInsuranceCompany.equals("Not have an Insurance")){
+                        radioGroup.check(R.id.radio_NoInsu);
+                        et_policyNO.setText(" ");
+                    } else if(selectedInsuranceCompany.equals("State Farm Group")){
+                        radioGroup.check(R.id.radio_lic);
+                        et_policyNO.setEnabled(true);
+                        et_policyNO.setText(info.getPolicy_No());
+                    } else if(selectedInsuranceCompany.equals("Berkshire Hathaway Ins")){
+                        radioGroup.check(R.id.radio_icici);
+                        et_policyNO.setEnabled(true);
+                        et_policyNO.setText(info.getPolicy_No());
+                    } else if(selectedInsuranceCompany.equals("Progressive Ins Group")){
+                        radioGroup.check(R.id.radio_sbi);
+                        et_policyNO.setEnabled(true);
+                        et_policyNO.setText(info.getPolicy_No());
+                    } else if(selectedInsuranceCompany.equals("Allstate Ins Group")){
+                        radioGroup.check(R.id.radio_birla);
+                        et_policyNO.setEnabled(true);
+                        et_policyNO.setText(info.getPolicy_No());
+                    } else if(selectedInsuranceCompany.equals("Liberty Mutual Ins Cos")){
+                        radioGroup.check(R.id.radio_hdfc);
+                        et_policyNO.setEnabled(true);
+                        et_policyNO.setText(info.getPolicy_No());
+                    }
                 }
+                dialog.dismiss();
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -145,6 +168,7 @@ public class UpdateVictimReportActivity extends AppCompatActivity {
                             Intent data = result.getData();
                             victimImageUri = data.getData();
                             victimImageView.setImageURI(victimImageUri);
+                            status = true;
                         } else {
                             Toast.makeText(UpdateVictimReportActivity.this, "No Victim Image Selected", Toast.LENGTH_SHORT).show();
                         }
@@ -366,12 +390,18 @@ public class UpdateVictimReportActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
-                Uri urlImage = uriTask.getResult();
-                victimImageURL = urlImage.toString();
-                dialog.show();
-                uploadData();
-                dialog.dismiss();
+                if(status){
+                    while (!uriTask.isComplete());
+                    Uri urlImage = uriTask.getResult();
+                    victimImageURL = urlImage.toString();
+                    dialog.show();
+                    uploadData();
+                    dialog.dismiss();
+                } else {
+                    dialog.show();
+                    uploadData();
+                    dialog.dismiss();
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

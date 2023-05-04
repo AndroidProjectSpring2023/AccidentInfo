@@ -29,7 +29,7 @@ public class InformationActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private AlertDialog.Builder builder;
     private AlertDialog dialog;
-    private Button editButton, saveOnUpdateButton, cancelButton;
+    private Button editButton, backToHomeButton;
     private Accident_Info info ;
     private Intent i;
     private boolean status;
@@ -52,7 +52,7 @@ public class InformationActivity extends AppCompatActivity {
         tv_imgInfo = findViewById(R.id.tv_ImgInfo);
         tv_videoInfo = findViewById(R.id.tv_VideoInfo);
         editButton = findViewById(R.id.editVictimButton);
-
+        backToHomeButton = findViewById(R.id.backToHomeButton);
 
 
         i = getIntent();
@@ -118,6 +118,14 @@ public class InformationActivity extends AppCompatActivity {
             }
         });
 
+        backToHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InformationActivity.this , HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
         tv_imgInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -138,15 +146,15 @@ public class InformationActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
-            case android.R.id.home :
-                onBackPressed();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        switch (item.getItemId()){
+//            case android.R.id.home :
+//                onBackPressed();
+//                break;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
 
