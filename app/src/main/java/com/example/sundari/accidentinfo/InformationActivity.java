@@ -60,6 +60,7 @@ public class InformationActivity extends AppCompatActivity {
 
         if(status == true){
             editButton.setVisibility(View.INVISIBLE);
+            backToHomeButton.setVisibility(View.INVISIBLE);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
